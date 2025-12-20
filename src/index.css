@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Route transition animations */
+@layer utilities {
+  /* Fade-in animation for route changes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Apply fade-in to all page content */
+  body > #root > * {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+}
+
+@layer base {
+  :root {
+    --chart-grid: #e5e7eb; /* gray-200 */
+    --chart-text: #6b7280; /* gray-500 */
+    --chart-tooltip-bg: #ffffff;
+    --chart-tooltip-border: #e5e7eb;
+    --chart-tooltip-text: #111827; /* gray-900 */
+    --chart-primary: #2563eb; /* blue-600 */
+    --chart-success: #059669; /* emerald-600 */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --chart-grid: #374151; /* gray-700 */
+      --chart-text: #9ca3af; /* gray-400 */
+      --chart-tooltip-bg: #1f2937; /* gray-800 */
+      --chart-tooltip-border: #374151; /* gray-700 */
+      --chart-tooltip-text: #f3f4f6; /* gray-100 */
+      --chart-primary: #60a5fa; /* blue-400 */
+      --chart-success: #34d399; /* emerald-400 */
+    }
+  }
+}

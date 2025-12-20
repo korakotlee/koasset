@@ -1,0 +1,65 @@
+/* Print-specific styles for the Consolidated Estate Report */
+
+@media print {
+  @page {
+    margin: 2cm;
+    size: auto;
+  }
+
+  /* Hide all web elements marked as print:hidden */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Enforce white background and high contrast text */
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Remove scrollbars and shadow */
+  .report-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Prevent elements from being split across pages */
+  .break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Header and footer repeating behavior (table based) */
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+
+  /* Professional grayscale for charts if any added later */
+  canvas, svg {
+    filter: grayscale(100%);
+  }
+
+  /* Link styling for print - hide URL to keep it clean */
+  a:after {
+    content: none !important;
+  }
+}
+
+/* Screen styles for the report view to simulate paper */
+@media screen {
+  body {
+    background: #f8fafc;
+  }
+
+  .report-container {
+    background: white;
+  }
+}
