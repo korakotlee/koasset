@@ -43,7 +43,6 @@ describe('backupService', () => {
       id: '1',
       name: 'Test Beneficiary',
       relationship: 'Spouse',
-      allocationPercentage: 100,
       createdAt: new Date('2023-01-01'),
       updatedAt: new Date('2023-01-01'),
     },

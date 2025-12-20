@@ -30,3 +30,4 @@ dist-ssr
 !.specify/**
 !ai/
 !ai/**
+ai/LEARNING.md
