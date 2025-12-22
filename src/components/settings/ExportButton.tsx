@@ -15,18 +15,23 @@ export const ExportButton: React.FC = () => {
         throw new Error('No data found to export');
       }
 
-      const blob = new Blob([JSON.stringify(container, null, 2)], { type: 'application/json' });
+      const blob = new Blob([JSON.stringify(container, null, 2)], { type: 'application/octet-stream' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
 
       const date = new Date().toISOString().split('T')[0];
       link.href = url;
-      link.download = `koasset-backup-${date}.enc`;
+      link.setAttribute('download', `koasset-backup-${date}.enc`);
+      link.style.display = 'none';
 
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+
+      // Small delay before cleanup to ensure Chrome initiates the download with the filename
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }, 100);
 
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);

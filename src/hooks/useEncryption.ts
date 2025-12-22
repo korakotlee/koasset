@@ -6,12 +6,13 @@ import { storageService } from '../services/StorageService';
 export const useEncryption = () => {
   const encryptAndSave = useCallback(async (data: unknown) => {
     const key = authService.getSessionKey();
-    if (!key) {
+    const salt = authService.getCurrentSalt();
+    if (!key || !salt) {
       throw new Error('Not authenticated');
     }
 
     const jsonString = JSON.stringify(data);
-    const container = await encryptionService.encrypt(jsonString, key);
+    const container = await encryptionService.encrypt(jsonString, key, salt);
     storageService.saveEncryptedData(container);
   }, []);
 

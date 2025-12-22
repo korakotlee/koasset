@@ -19,8 +19,13 @@ class PersistenceService {
       // Initialize empty if nothing exists
       this.data = { assets: [], beneficiaries: [], history: [], settings: [] };
     } else {
-      const decrypted = await encryptionService.decrypt(container, key);
-      this.data = JSON.parse(decrypted);
+      try {
+        const decrypted = await encryptionService.decrypt(container, key);
+        this.data = JSON.parse(decrypted);
+      } catch (err) {
+        console.error('PersistenceService: Hydration failed', err);
+        throw err;
+      }
     }
 
     this.isHydrated = true;
@@ -42,12 +47,13 @@ class PersistenceService {
 
   private async persist(): Promise<void> {
     const key = authService.getSessionKey();
-    if (!key) return;
+    const salt = authService.getCurrentSalt();
+    if (!key || !salt) return;
 
     if (!this.data) return;
 
     const jsonString = JSON.stringify(this.data);
-    const container = await encryptionService.encrypt(jsonString, key);
+    const container = await encryptionService.encrypt(jsonString, key, salt);
     storageService.saveEncryptedData(container);
   }
 

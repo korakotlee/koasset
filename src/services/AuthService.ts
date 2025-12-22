@@ -8,6 +8,7 @@ const LOCKOUT_DURATION_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 export class AuthService {
   private sessionKey: CryptoKey | null = null;
+  private currentSalt: Uint8Array | null = null;
 
   isSetupComplete(): boolean {
     return storageService.getEncryptedData() !== null;
@@ -27,6 +28,7 @@ export class AuthService {
 
     storageService.saveEncryptedData(container);
     this.sessionKey = key;
+    this.currentSalt = salt;
     await persistenceService.hydrate();
   }
 
@@ -51,6 +53,7 @@ export class AuthService {
 
       // Success
       this.sessionKey = key;
+      this.currentSalt = salt;
       await persistenceService.hydrate();
       this.resetAuthMetadata();
       return true;
@@ -80,6 +83,7 @@ export class AuthService {
       storageService.saveEncryptedData(newContainer);
 
       this.sessionKey = newKey;
+      this.currentSalt = newSalt;
       return true;
     } catch {
       return false;
@@ -107,6 +111,10 @@ export class AuthService {
 
   getSessionKey(): CryptoKey | null {
     return this.sessionKey;
+  }
+
+  getCurrentSalt(): Uint8Array | null {
+    return this.currentSalt;
   }
 
   private handleFailedAttempt(metadata: AuthMetadata): void {

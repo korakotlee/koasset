@@ -59,8 +59,13 @@ export const ImportButton: React.FC = () => {
 
       // Force reload to pick up new data
       setTimeout(() => window.location.reload(), 2000);
-    } catch {
-      setError('Incorrect PIN for this backup or corrupted file.');
+    } catch (err: any) {
+      console.error('Import failed:', err);
+      if (err.name === 'OperationError' || err.message?.includes('decryption')) {
+        setError('Incorrect PIN for this backup.');
+      } else {
+        setError(`Import failed: ${err.message || 'Unknown error'}`);
+      }
     }
   };
 
