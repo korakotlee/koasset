@@ -7,11 +7,21 @@ import HomePage from './components/home/HomePage';
 import { DashboardPage } from './components/dashboard/DashboardPage';
 import { SettingsPage } from './components/settings/SettingsPage';
 import { ReportPage } from './pages/ReportPage';
-
-
-
+import { useAuth } from './hooks/useAuth';
+import { PinSetup } from './components/auth/PinSetup';
+import { PinEntry } from './components/auth/PinEntry';
 
 function App() {
+  const { isSetup, isAuthenticated } = useAuth();
+
+  if (!isSetup) {
+    return <PinSetup />;
+  }
+
+  if (!isAuthenticated) {
+    return <PinEntry />;
+  }
+
   return (
     <ErrorBoundary>
       <BrowserRouter>

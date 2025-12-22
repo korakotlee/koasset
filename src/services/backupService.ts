@@ -73,14 +73,13 @@ export const backupService = {
   /**
    * Validate backup data structure
    */
-  isValidBackup(data: any): data is BackupData {
+  isValidBackup(data: unknown): data is BackupData {
+    if (typeof data !== 'object' || data === null) return false;
+    const d = data as Record<string, unknown>;
     return (
-      typeof data === 'object' &&
-      data !== null &&
-      Array.isArray(data.assets) &&
-      Array.isArray(data.beneficiaries) &&
-      Array.isArray(data.history)
-      // We could add more strict checks here, but this covers the basic structure
+      Array.isArray(d.assets) &&
+      Array.isArray(d.beneficiaries) &&
+      Array.isArray(d.history)
     );
   },
 };

@@ -11,15 +11,11 @@ import '../styles/print.css';
  * Main Report Page component that fetches data and coordinates the report view.
  */
 export const ReportPage: React.FC = () => {
-  const [reportData, setReportData] = useState<ReportData | null>(null);
+  const [reportData] = useState<ReportData | null>(() => reportService.generateReportData());
 
   useEffect(() => {
     // Scroll to top on load
     window.scrollTo(0, 0);
-
-    // Generate report data from storage
-    const data = reportService.generateReportData();
-    setReportData(data);
   }, []);
 
   if (!reportData) {

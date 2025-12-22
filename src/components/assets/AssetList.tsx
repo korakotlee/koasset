@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import type { Asset } from '../../types/Asset';
 import { assetStorage } from '../../services/assetStorage';
 import { EmptyState } from '../common/EmptyState';
@@ -12,21 +12,13 @@ interface AssetListProps {
 }
 
 export const AssetList: React.FC<AssetListProps> = ({ onEdit, onViewDetail, onCreateNew }) => {
-  const [assets, setAssets] = useState<Asset[]>([]);
+  const [assets, setAssets] = useState<Asset[]>(() => assetStorage.load());
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [sortBy, setSortBy] = useState<'name' | 'value' | 'category' | 'lastReviewed'>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const loadAssets = useCallback(async () => {
-    setIsLoading(true);
-    // Simulate network delay for smoother UX
-    await new Promise(resolve => setTimeout(resolve, 300));
-    const loadedAssets = assetStorage.load();
-    setAssets(loadedAssets);
-    setIsLoading(false);
-  }, []);
 
   const filteredAssets = useMemo(() => {
     let result = [...assets];
@@ -75,9 +67,6 @@ export const AssetList: React.FC<AssetListProps> = ({ onEdit, onViewDetail, onCr
     return result;
   }, [assets, searchQuery, categoryFilter, sortBy, sortOrder]);
 
-  useEffect(() => {
-    loadAssets();
-  }, [loadAssets]);
 
   const maskAccountNumber = (accountNumber?: string): string => {
     if (!accountNumber) return 'N/A';

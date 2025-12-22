@@ -1,87 +1,47 @@
-import { useRef } from 'react';
-import { backupService } from '../../services/backupService';
 import { Layout } from '../layout/Layout';
+import { ExportButton } from './ExportButton';
+import { ImportButton } from './ImportButton';
+import { ChangePinForm } from './ChangePinForm';
+import { ShieldAlert } from 'lucide-react';
 
 /**
  * Settings page component
  * Application settings and preferences
  */
 export function SettingsPage() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleExport = () => {
-    try {
-      backupService.exportData();
-    } catch (error) {
-      console.error('Failed to export data:', error);
-      alert('Failed to export data. Please try again.');
-    }
-  };
-
-  const handleImportClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    if (!window.confirm('WARNING: This action will replace all your current data with the backup. This cannot be undone. Are you sure you want to proceed?')) {
-      // Reset input
-      event.target.value = '';
-      return;
-    }
-
-    try {
-      await backupService.importData(file);
-      alert('Data imported successfully! The page will now reload.');
-      window.location.reload();
-    } catch (error) {
-      console.error('Failed to import data:', error);
-      alert('Failed to import data. Please ensure the file is a valid backup.');
-    }
-
-    // Reset input
-    event.target.value = '';
-  };
-
   return (
     <Layout>
-      <div className="space-y-6 p-6">
+      <div className="max-w-4xl mx-auto space-y-8 p-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-          <p className="mt-2 text-gray-600">Manage your application preferences and data.</p>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Settings</h1>
+          <p className="mt-2 text-slate-600">Secure your configuration and manage your financial data.</p>
         </div>
 
-        <div className="bg-white shadow sm:rounded-lg">
-          <div className="px-4 py-5 sm:p-6">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Data Management</h3>
-            <div className="mt-2 max-w-xl text-sm text-gray-500">
-              <p>Export your data to create a backup or import data from a previous backup.</p>
+        <div className="bg-white border border-slate-200 shadow-sm rounded-2xl overflow-hidden">
+          <div className="p-8">
+            <h3 className="text-xl font-bold text-slate-900 mb-4">Security & Backups</h3>
+            <p className="text-slate-600 mb-8 text-sm leading-relaxed">
+              All your data is encrypted locally using your 4-digit PIN. To move your data between devices or keep a safe copy, use the export feature below.
+            </p>
+
+            <div className="space-y-6">
+              <ExportButton />
+              <ImportButton />
+              <ChangePinForm />
+
+              <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl flex gap-3">
+                <ShieldAlert className="text-amber-600 shrink-0" size={20} />
+                <div className="text-xs text-amber-800 leading-relaxed">
+                  <strong>Warning:</strong> Exported backups are encrypted with your CURRENT PIN.
+                  If you change your PIN later, older backups will still require the PIN they were created with.
+                </div>
+              </div>
             </div>
-            <div className="mt-5 flex gap-4">
-              <button
-                type="button"
-                onClick={handleExport}
-                className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Export Backup
-              </button>
-              <button
-                type="button"
-                onClick={handleImportClick}
-                className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Import Backup
-              </button>
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                accept=".json"
-                className="hidden"
-              />
-            </div>
+          </div>
+
+          <div className="bg-slate-50 px-8 py-4 border-t border-slate-200 flex justify-between items-center text-xs text-slate-400">
+            <span>Encryption Standard: AES-256-GCM</span>
+            <span>KDF: PBKDF2 (600k iterations)</span>
           </div>
         </div>
       </div>

@@ -115,7 +115,7 @@ export const AssetForm: React.FC<AssetFormProps> = ({ asset, onSave, onCancel })
     }
 
     if (formData.phoneNumber && formData.phoneNumber.length > 0) {
-      const phoneRegex = /^[\d\s\-\(\)\+]+$/;
+      const phoneRegex = /^[\d\s\-()+]+$/;
       if (!phoneRegex.test(formData.phoneNumber)) {
         newErrors.phoneNumber = 'Invalid phone number format';
       }
