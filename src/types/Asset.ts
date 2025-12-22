@@ -1,4 +1,4 @@
-// Asset interface and related types for KoFi asset management
+// Asset interface and related types for KoAsset asset management
 
 /**
  * Asset category classification

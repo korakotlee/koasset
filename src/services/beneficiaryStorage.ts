@@ -2,7 +2,7 @@
 import type { Beneficiary } from '../types/Beneficiary';
 import { assetStorage } from './assetStorage';
 
-const STORAGE_KEY = 'kofi_beneficiaries';
+const STORAGE_KEY = 'koasset_beneficiaries';
 
 /**
  * Beneficiary storage service providing CRUD operations with referential integrity checks

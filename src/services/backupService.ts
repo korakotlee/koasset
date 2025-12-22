@@ -20,10 +20,10 @@ export const backupService = {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
 
-    // Format filename: kofi-backup-YYYY-MM-DD.json
+    // Format filename: koasset-backup-YYYY-MM-DD.json
     const date = new Date().toISOString().split('T')[0];
     link.href = url;
-    link.download = `kofi-backup-${date}.json`;
+    link.download = `koasset-backup-${date}.json`;
 
     document.body.appendChild(link);
     link.click();

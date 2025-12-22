@@ -1,7 +1,7 @@
 import { Navigation } from './Navigation';
 
 /**
- * Header component with KoFi logo and navigation menu
+ * Header component with KoAsset logo and navigation menu
  * Logo scales responsively: mobile (h-8), tablet (h-10), desktop (h-12)
  */
 export function Header() {
@@ -12,11 +12,11 @@ export function Header() {
           {/* Logo - Responsive sizing */}
           <div className="flex items-center">
             <img
-              src="/kofi.svg"
-              alt="KoFi Logo"
+              src="/koasset.svg"
+              alt="KoAsset Logo"
               className="h-8 md:h-10 lg:h-12 w-auto object-contain"
             />
-            <span className="ml-2 text-lg md:text-xl font-bold text-white tracking-tight">KoFi</span>
+            <span className="ml-2 text-lg md:text-xl font-bold text-white tracking-tight">KoAsset</span>
           </div>
         </div>
       </div>

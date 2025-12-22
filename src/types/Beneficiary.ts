@@ -1,4 +1,4 @@
-// Beneficiary interface and related types for KoFi beneficiary management
+// Beneficiary interface and related types for KoAsset beneficiary management
 
 /**
  * Beneficiary relationship classification

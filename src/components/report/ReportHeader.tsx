@@ -6,7 +6,7 @@ interface ReportHeaderProps {
 }
 
 /**
- * Professional report header with KoFi logo and generation metadata.
+ * Professional report header with KoAsset logo and generation metadata.
  */
 export const ReportHeader: React.FC<ReportHeaderProps> = ({ title, generatedAt }) => {
   const formattedDate = new Date(generatedAt).toLocaleString(undefined, {
@@ -19,13 +19,13 @@ export const ReportHeader: React.FC<ReportHeaderProps> = ({ title, generatedAt }
       <div className="flex items-center gap-12">
         <div className="w-12 h-12 flex-shrink-0">
           <img
-            src="/kofi-black.svg"
-            alt="KoFi Logo"
+            src="/koasset-black.svg"
+            alt="KoAsset Logo"
             className="w-full h-full object-contain"
           />
         </div>
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">KoFi</h1>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">KoAsset</h1>
           <p className="text-xl text-slate-700 font-semibold">{title}</p>
         </div>
       </div>

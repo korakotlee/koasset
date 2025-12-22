@@ -1,4 +1,4 @@
-// Navigation types for KoFi application routing
+// Navigation types for KoAsset application routing
 
 /**
  * Navigation section representing a menu item/route in the application
@@ -12,7 +12,7 @@ export interface NavigationSection {
 }
 
 /**
- * Predefined navigation sections for the KoFi application
+ * Predefined navigation sections for the KoAsset application
  * Static configuration - not stored in localStorage
  */
 export const NAVIGATION_SECTIONS: NavigationSection[] = [

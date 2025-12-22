@@ -2,7 +2,7 @@
 import type { Asset } from '../types/Asset';
 import { historyStorage } from './historyStorage';
 
-const STORAGE_KEY = 'kofi_assets';
+const STORAGE_KEY = 'koasset_assets';
 
 /**
  * Asset storage service providing CRUD operations for localStorage

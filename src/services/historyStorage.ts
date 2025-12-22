@@ -2,7 +2,7 @@
 import type { AssetHistory } from '../types/AssetHistory';
 import type { Asset } from '../types/Asset';
 
-const HISTORY_STORAGE_KEY = 'kofi_asset_history';
+const HISTORY_STORAGE_KEY = 'koasset_asset_history';
 
 /**
  * History storage service providing CRUD operations for asset history
