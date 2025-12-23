@@ -1,21 +1,25 @@
 import type { ReactNode } from 'react';
 import { Header } from './Header';
+import { Footer } from './Footer';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 /**
- * Layout component wrapping page content with Header and responsive container
+ * Layout component wrapping page content with Header, main content, and Footer
  */
 export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
         {children}
       </main>
+
+      <Footer />
     </div>
   );
 }
+
