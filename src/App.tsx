@@ -7,31 +7,22 @@ import HomePage from './components/home/HomePage';
 import { DashboardPage } from './components/dashboard/DashboardPage';
 import { SettingsPage } from './components/settings/SettingsPage';
 import { ReportPage } from './pages/ReportPage';
-import { useAuth } from './hooks/useAuth';
-import { PinSetup } from './components/auth/PinSetup';
-import { PinEntry } from './components/auth/PinEntry';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 
 function App() {
-  const { isSetup, isAuthenticated } = useAuth();
-
-  if (!isSetup) {
-    return <PinSetup />;
-  }
-
-  if (!isAuthenticated) {
-    return <PinEntry />;
-  }
-
   return (
     <ErrorBoundary>
       <BrowserRouter>
         <Routes>
+          {/* Home page is unprotected - visitors can see it without PIN */}
           <Route path="/" element={<Layout><HomePage /></Layout>} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/assets" element={<AssetsPage />} />
-          <Route path="/beneficiaries" element={<BeneficiariesPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/report" element={<ReportPage />} />
+
+          {/* All other routes are protected - require PIN setup/entry */}
+          <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+          <Route path="/assets" element={<ProtectedRoute><AssetsPage /></ProtectedRoute>} />
+          <Route path="/beneficiaries" element={<ProtectedRoute><BeneficiariesPage /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+          <Route path="/report" element={<ProtectedRoute><ReportPage /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </ErrorBoundary>
@@ -39,3 +30,4 @@ function App() {
 }
 
 export default App;
+

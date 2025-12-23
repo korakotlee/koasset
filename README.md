@@ -1,9 +1,24 @@
-# KoAsset - Consolidated Estate Report
+# KoAsset - Sovereign Asset Tracking
 
-KoAsset helps you manage and visualize your estate, assets, and beneficiaries.
+**Your assets. Your data. Your control.**
+
+KoAsset is a **non-custodial, local-first financial inventory system** that helps you manage and visualize your estate, assets, and beneficiaries—without ever sending your data to the cloud.
+
+### Why KoAsset?
+
+- 🔒 **Total Privacy** — Zero data collection. Your financial data never leaves your device.
+- ⚡ **Instant Utility** — No account creation required. Start tracking assets immediately.
+- 👨‍👩‍👧‍👦 **Legacy Planning** — Focus on asset *handoff* to beneficiaries, not just portfolio performance.
+- 🌐 **Open Source** — Fully transparent. [View the code →](https://github.com/korakotlee/koasset)
+
+### Who is KoAsset for?
+
+- **Privacy Advocates** — People who value data ownership and want full control.
+- **Estate Organizers** — Families organizing asset data for heirs and beneficiaries.
+- **Modern Investors** — Users tracking diverse assets (Real Estate, Crypto, Collections) that automated tools often miss.
 
 ## Try it out
-You can try the live version here: [https://koasset.vercel.app/](https://koasset.vercel.app/)
+Use it here: [https://koasset.vercel.app/](https://koasset.vercel.app/)
 
 ### Instructions
 1. **Add Data**: Enter your assets and beneficiaries to see the visualization.
@@ -32,3 +47,15 @@ This project is built with React, TypeScript, and Vite.
    ```bash
    npm run build
    ```
+
+## Contributing
+
+KoAsset is open source and contributions are welcome!
+
+- 🐛 [Report Issues](https://github.com/korakotlee/koasset/issues)
+- 🔀 [Submit Pull Requests](https://github.com/korakotlee/koasset/pulls)
+- ⭐ [Star the Repository](https://github.com/korakotlee/koasset)
+
+## License
+
+MIT © [Korakot Leemakdej](https://github.com/korakotlee)
