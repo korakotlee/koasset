@@ -75,14 +75,8 @@ export class EncryptionService {
   /**
    * Re-encrypt data from an old key to a new key.
    */
-  async reEncrypt(container: EncryptedContainer, oldKey: CryptoKey, newKey: CryptoKey): Promise<EncryptedContainer> {
+  async reEncrypt(container: EncryptedContainer, oldKey: CryptoKey, newKey: CryptoKey, newSalt: Uint8Array): Promise<EncryptedContainer> {
     const decryptedData = await this.decrypt(container, oldKey);
-    // Reuse the same salt or generate a new one?
-    // Usually a new salt is better on PIN change.
-    const newSalt = crypto.getRandomValues(new Uint8Array(16));
-    // We need to re-derive the key with the new salt if we want to change it.
-    // BUT the newKey passed here should already be derived with its own salt.
-    // So we just need to encrypt the data with the newKey.
     return this.encrypt(decryptedData, newKey, newSalt);
   }
 

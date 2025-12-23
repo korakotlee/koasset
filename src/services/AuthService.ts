@@ -79,7 +79,7 @@ export class AuthService {
       const newKey = await encryptionService.deriveKey(newPin, newSalt);
 
       // Re-encrypt
-      const newContainer = await encryptionService.reEncrypt(container, oldKey, newKey);
+      const newContainer = await encryptionService.reEncrypt(container, oldKey, newKey, newSalt);
       storageService.saveEncryptedData(newContainer);
 
       this.sessionKey = newKey;
